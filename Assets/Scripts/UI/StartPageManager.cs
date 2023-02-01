@@ -9,5 +9,30 @@ public class StartPageManager : MonoBehaviour
     public Button btnPlay;
     public Button btnHelp;
 
+    private void Awake()
+    {
+        btnPlay.onClick.RemoveAllListeners();
+        btnPlay.onClick.AddListener(delegate ()
+        {
+            StartGame();
+        });
 
+        btnHelp.onClick.RemoveAllListeners();
+        btnHelp.onClick.AddListener(delegate ()
+        {
+
+        });
+    }
+
+
+
+    public void ShowContent()
+    {
+        objPage.SetActive(true);
+    }
+
+    public void StartGame()
+    {
+        objPage.SetActive(false);
+    }
 }

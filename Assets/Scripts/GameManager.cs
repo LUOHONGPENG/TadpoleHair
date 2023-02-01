@@ -8,4 +8,8 @@ public class GameManager : MonoBehaviour
 
     public HeadManager headManager;
 
+    public void Start()
+    {
+        
+    }
 }
