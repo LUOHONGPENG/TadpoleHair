@@ -4,48 +4,59 @@ using UnityEngine;
 
 public class HeadManager : MonoBehaviour
 {
+    [Header("Asset")]
     public Texture2D texture_Head;
-    Texture2D newTexture;
     public SpriteRenderer sr_Head;
-    
+    public PhysicsMaterial2D pm_Head;
     public GameObject pfTadpole;
     public Transform tfContent;
+    //Generate Dynamically
+    private Texture2D newTexture;
+    private PolygonCollider2D colHead;
 
+    //Some mapping information
     float worldWidth, worldHeight;
     float pixelWidth, pixelHeight;
-
+    //Cool down timer for generating the tadpole
     float timerBornTadpole = 0;
 
     private void Start()
     {
-        Init();
+        StartPlanting();
     }
-
-
 
     public void Init()
     {
-        CreateHeadCollider();
+
     }
 
-    #region Init
-    public void CreateHeadCollider()
+    public void StartPlanting()
     {
+        InitHead();
+    }
+
+
+    #region Init
+    public void InitHead()
+    {
+        //According to the asset to create a new texture
         newTexture = new Texture2D(texture_Head.width, texture_Head.height);
         Color[] colors = texture_Head.GetPixels();
         newTexture.SetPixels(colors);
-
+        //Apply and make sprite
         newTexture.Apply();
         MakeSprite();
-
+        //Read and load the mapping information
         worldWidth = sr_Head.bounds.size.x;
         worldHeight = sr_Head.bounds.size.y;
         pixelWidth = sr_Head.sprite.texture.width;
         pixelHeight = sr_Head.sprite.texture.height;
 
         Debug.Log("World:" + worldWidth + "," + worldHeight + "Pixel:" + pixelWidth + "," + pixelHeight);
-
-        sr_Head.gameObject.AddComponent<PolygonCollider2D>();
+        
+        //Generate the collider
+        colHead = sr_Head.gameObject.AddComponent<PolygonCollider2D>();
+        colHead.sharedMaterial = pm_Head;
     }
     #endregion
 
@@ -54,13 +65,11 @@ public class HeadManager : MonoBehaviour
     public void Update()
     {
         timerBornTadpole -= Time.deltaTime;
-
+        //
         CheckMakingDot();
-
         if (timerBornTadpole < 0)
         {
             CheckCreatingTadpole();
-
         }
     }
 
@@ -118,9 +127,12 @@ public class HeadManager : MonoBehaviour
         newTexture.Apply();
         MakeSprite();
 
-        Destroy(sr_Head.gameObject.GetComponent<PolygonCollider2D>());
-        sr_Head.gameObject.AddComponent<PolygonCollider2D>();
-
+        if (colHead != null)
+        {
+            Destroy(colHead);
+        }
+        colHead = sr_Head.gameObject.AddComponent<PolygonCollider2D>();
+        colHead.sharedMaterial = pm_Head;
     }
 
     void MakeSprite()
