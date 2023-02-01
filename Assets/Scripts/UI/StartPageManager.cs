@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StartPageManager : MonoBehaviour
 {
+    public GameObject objPage;
     public Button btnPlay;
     public Button btnHelp;
 

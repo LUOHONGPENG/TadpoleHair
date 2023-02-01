@@ -6,6 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public UIManager uiManager;
 
-
+    public HeadManager headManager;
 
 }
