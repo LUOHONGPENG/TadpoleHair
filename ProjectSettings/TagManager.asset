@@ -42,6 +42,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Frog
+    uniqueID: 1934876481
+    locked: 0
   - name: Tadpole
     uniqueID: 322603489
+    locked: 0
+  - name: Head
+    uniqueID: 292153703
+    locked: 0
+  - name: UI
+    uniqueID: 2276809149
     locked: 0

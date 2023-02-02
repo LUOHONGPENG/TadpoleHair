@@ -25,27 +25,60 @@ public class TadpoleManager : MonoBehaviour
     public List<Vector2> listPosMouth;
 
     private PolygonCollider2D colliderPoly;
+    private int idBody = 0;
+    private int idEye = 0;
+    private int idMouth = 0;
+
+
+
+    public float GetTadpoleScale()
+    {
+        return 0.3f;
+    }
+
 
     public void InitTadpole()
     {
-        int ranBody = Random.Range(0, 3);
-        int ranEye = Random.Range(0, 3);
-        int ranMouth = Random.Range(0, 3);
+        InitTadpoleID();
+        InitTadpoleSpritePos();
+        ResetTadpoleScale();
+        StartCoroutine(IE_InitTadpole());
+    }
 
-        srBody.transform.localScale = new Vector2(0.3f, 0.3f);
+    public void InitTadpoleID()
+    {
+        idBody = Random.Range(0, 3);
+        idEye = Random.Range(0, 3);
+        idMouth = Random.Range(0, 3);
+    }
 
-        srBody.sprite = listSpBody[ranBody];
-        srEyeL.sprite = listSpEyeL[ranEye];
-        srEyeR.sprite = listSpEyeR[ranEye];
-        srMouth.sprite = listSpMouth[ranMouth];
+    public void InitTadpoleSpritePos()
+    {
+        srBody.sprite = listSpBody[idBody];
+        srEyeL.sprite = listSpEyeL[idEye];
+        srEyeR.sprite = listSpEyeR[idEye];
+        srMouth.sprite = listSpMouth[idMouth];
 
-        srBody.transform.localPosition = listPosBody[ranBody];
-        tfFace.transform.localPosition = listPosFace[ranBody];
-        srEyeL.transform.localPosition = listPosEyeL[ranEye];
-        srEyeR.transform.localPosition = listPosEyeR[ranEye];
-        srMouth.transform.localPosition = listPosMouth[ranMouth];
+        tfFace.transform.localPosition = listPosFace[idBody];
+        srEyeL.transform.localPosition = listPosEyeL[idEye];
+        srEyeR.transform.localPosition = listPosEyeR[idEye];
+        srMouth.transform.localPosition = listPosMouth[idMouth];
+    }
 
+    public void ResetTadpoleScale()
+    {
+        srBody.transform.localScale = new Vector2(GetTadpoleScale(), GetTadpoleScale());
+
+        srBody.transform.localPosition = new Vector2(listPosBody[idBody].x * GetTadpoleScale(),listPosBody[idBody].y * GetTadpoleScale());
         srBody.gameObject.AddComponent<PolygonCollider2D>();
     }
 
+    public IEnumerator IE_InitTadpole()
+    {
+        yield return new WaitForSeconds(2f);
+        srBody.sortingOrder = 0;
+        srEyeL.sortingOrder = 1;
+        srEyeR.sortingOrder = 1;
+        srMouth.sortingOrder = 1;
+    }
 }

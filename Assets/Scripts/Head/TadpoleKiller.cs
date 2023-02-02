@@ -8,7 +8,7 @@ public class TadpoleKiller : MonoBehaviour
     {
         if(collision.gameObject.tag == "Tadpole")
         {
-            Destroy(collision.gameObject);
+            Destroy(collision.transform.parent.gameObject);
         }
     }
 

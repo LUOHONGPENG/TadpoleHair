@@ -21,7 +21,11 @@ public class HeadManager : MonoBehaviour
     public GameObject pfTadpole;
     public Transform tfContentTadpole;
 
-    [Header("Location")]
+    [Header("SubManager")]
+    public FrogAssManager assManager;
+
+
+    [Header("Extra")]
     public Transform locaGenerateTadpole;
 
     //ActionType
@@ -48,7 +52,7 @@ public class HeadManager : MonoBehaviour
     {
         objContent.SetActive(true);
         InitHead();
-        actionType = ActionType.Lick;
+        ChangeAction(ActionType.Lick);
     }
 
     #region InitHead
@@ -93,21 +97,35 @@ public class HeadManager : MonoBehaviour
 
     public void ChangeAction(ActionType type)
     {
+        //Hide All
+        assManager.HideContent();
+
+        //Set Type
         actionType = type;
+        switch (actionType)
+        {
+            case ActionType.Lick:
+
+                break;
+            case ActionType.Tadpole:
+                assManager.ShowContent();
+                break;
+        }
     }
 
     public void CheckClickAction()
     {
         if (Input.GetMouseButton(0))
         {
-            Vector3 MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePosition = PublicTool.GetMousePosition2D();
             switch (actionType)
             {
                 case ActionType.Lick:
-                    LickAction();
+                    LickAction(mousePosition);
                     break;
                 case ActionType.Tadpole:
-                    BornTadpole(MousePosition);
+                    //BornTadpole(mousePosition);
+                    BornTadpole(assManager.GetAssPosition());
                     break;
             }
             timerBornTadpole = 0.4f;
@@ -116,7 +134,15 @@ public class HeadManager : MonoBehaviour
 
     public void CheckHoverAction()
     {
-
+        Vector2 mousePosition = PublicTool.GetMousePosition2D();
+        switch (actionType)
+        {
+            case ActionType.Lick:
+                break;
+            case ActionType.Tadpole:
+                assManager.SetPosition(mousePosition);
+                break;
+        }
     }
 
     #endregion
@@ -124,19 +150,17 @@ public class HeadManager : MonoBehaviour
     #region Dot
 
     //Dig a hole
-    public void LickAction()
+    public void LickAction(Vector2 pos)
     {
-        Vector3 MousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        Collider2D overCollider2D = Physics2D.OverlapCircle(MousePosition, 0.01f, LayerMask.GetMask("Head"));
+        Collider2D overCollider2D = Physics2D.OverlapCircle(pos, 0.01f, LayerMask.GetMask("Head"));
         if (overCollider2D != null)
         {
-            MakeHole(MousePosition);
+            MakeHole(pos);
         }
     }
 
     //When click the pixel, make a dot
-    public void MakeHole(Vector3 pos)
+    public void MakeHole(Vector2 pos)
     {
         Vector2Int pixelPos = WorldToPixel(pos);
         Debug.Log(pixelPos);
@@ -198,8 +222,7 @@ public class HeadManager : MonoBehaviour
     #region BornAction
     public void BornTadpole(Vector2 pos)
     {
-        Vector2 posGenerate = new Vector2(pos.x, locaGenerateTadpole.position.y);
-        GameObject objTadpole = GameObject.Instantiate(pfTadpole, posGenerate, Quaternion.Euler(Vector2.zero), tfContentTadpole);
+        GameObject objTadpole = GameObject.Instantiate(pfTadpole, pos, Quaternion.Euler(Vector2.zero), tfContentTadpole);
         TadpoleManager itemTadpole = objTadpole.GetComponent<TadpoleManager>();
         itemTadpole.InitTadpole();
     }
