@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3535891474604137098}
   m_Layer: 0
   m_Name: srEyeMouth
-  m_TagString: Untagged
+  m_TagString: Tadpole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 499634762584526790}
   m_Layer: 0
   m_Name: srEyeL
-  m_TagString: Untagged
+  m_TagString: Tadpole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,12 +179,12 @@ GameObject:
   - component: {fileID: 6235633668644160963}
   - component: {fileID: 6841715146402564840}
   m_Layer: 0
-  m_Name: collider
-  m_TagString: Untagged
+  m_Name: colliderHead
+  m_TagString: Tadpole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6235633668644160963
 Transform:
   m_ObjectHideFlags: 0
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 3528161891001070403}
   m_Layer: 0
   m_Name: srEyeR
-  m_TagString: Untagged
+  m_TagString: Tadpole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 1309760150006918112}
   m_Layer: 0
   m_Name: tfFace
-  m_TagString: Untagged
+  m_TagString: Tadpole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 842022054769615340}
   m_Layer: 0
   m_Name: srBody
-  m_TagString: Untagged
+  m_TagString: Tadpole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

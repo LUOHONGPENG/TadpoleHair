@@ -13,13 +13,13 @@ public enum ActionType
 
 public class HeadManager : MonoBehaviour
 {
-    [Header("Asset")]
     public GameObject objContent;
+    [Header("Asset")]
     public Texture2D texture_Head;
     public SpriteRenderer sr_Head;
     public PhysicsMaterial2D pm_Head;
     public GameObject pfTadpole;
-    public Transform tfContent;
+    public Transform tfContentTadpole;
 
     [Header("Location")]
     public Transform locaGenerateTadpole;
@@ -199,9 +199,10 @@ public class HeadManager : MonoBehaviour
     public void BornTadpole(Vector2 pos)
     {
         Vector2 posGenerate = new Vector2(pos.x, locaGenerateTadpole.position.y);
-        GameObject objTadpole = GameObject.Instantiate(pfTadpole, posGenerate, Quaternion.Euler(Vector2.zero), tfContent);
+        GameObject objTadpole = GameObject.Instantiate(pfTadpole, posGenerate, Quaternion.Euler(Vector2.zero), tfContentTadpole);
         TadpoleManager itemTadpole = objTadpole.GetComponent<TadpoleManager>();
         itemTadpole.InitTadpole();
     }
+
     #endregion
 }

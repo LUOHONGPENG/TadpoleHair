@@ -45,7 +45,7 @@ public class TadpoleManager : MonoBehaviour
         srEyeR.transform.localPosition = listPosEyeR[ranEye];
         srMouth.transform.localPosition = listPosMouth[ranMouth];
 
-        //srBody.gameObject.AddComponent<PolygonCollider2D>();
+        srBody.gameObject.AddComponent<PolygonCollider2D>();
     }
 
 }
