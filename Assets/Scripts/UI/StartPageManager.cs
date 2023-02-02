@@ -9,7 +9,7 @@ public class StartPageManager : MonoBehaviour
     public Button btnPlay;
     public Button btnHelp;
 
-    private void Awake()
+    public void Init()
     {
         btnPlay.onClick.RemoveAllListeners();
         btnPlay.onClick.AddListener(delegate ()
@@ -34,5 +34,6 @@ public class StartPageManager : MonoBehaviour
     public void StartGame()
     {
         objPage.SetActive(false);
+        GameManager.Instance.StartHead();
     }
 }

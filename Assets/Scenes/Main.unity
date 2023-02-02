@@ -152,8 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec953ed537119c042b23fe2a0fed0570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiManager: {fileID: 388684584}
   headManager: {fileID: 540147999}
+  uiManager: {fileID: 388684584}
 --- !u!4 &241716586
 Transform:
   m_ObjectHideFlags: 0
@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000e1893a13
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

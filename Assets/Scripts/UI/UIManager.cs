@@ -6,6 +6,14 @@ public class UIManager : MonoBehaviour
 {
     public StartPageManager startPageManager;
 
+    public HeadUIManager headUIManager;
 
-
+    public void Init()
+    {
+        //InitAllUIManager;
+        startPageManager.Init();
+        headUIManager.Init();
+        //
+        startPageManager.ShowContent();
+    }
 }
