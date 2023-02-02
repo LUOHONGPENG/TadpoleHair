@@ -51,6 +51,9 @@ TagManager:
   - name: Head
     uniqueID: 292153703
     locked: 0
+  - name: Tongue
+    uniqueID: 2540005219
+    locked: 0
   - name: UI
     uniqueID: 2276809149
     locked: 0

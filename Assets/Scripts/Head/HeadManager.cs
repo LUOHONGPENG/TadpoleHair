@@ -23,7 +23,7 @@ public class HeadManager : MonoBehaviour
 
     [Header("SubManager")]
     public FrogAssManager assManager;
-
+    public FrogMouthManager mouthManager;
 
     [Header("Extra")]
     public Transform locaGenerateTadpole;
