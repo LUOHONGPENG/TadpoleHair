@@ -26,7 +26,6 @@ public class HeadManager : MonoBehaviour
     public FrogMouthManager mouthManager;
 
     [Header("Extra")]
-    public Transform locaGenerateTadpole;
 
     //ActionType
     private ActionType actionType;
@@ -45,6 +44,8 @@ public class HeadManager : MonoBehaviour
     {
         objContent.SetActive(false);
         headUIManager = GameManager.Instance.uiManager.headUIManager;
+        assManager.Init(this);
+        mouthManager.Init(this);
     }
 
     //StartGame
@@ -85,9 +86,10 @@ public class HeadManager : MonoBehaviour
     {
         timerBornTadpole -= Time.deltaTime;
 
-        CheckHoverAction();
         if (timerBornTadpole < 0)
         {
+            CheckHoverAction();
+
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 CheckClickAction();
@@ -99,13 +101,13 @@ public class HeadManager : MonoBehaviour
     {
         //Hide All
         assManager.HideContent();
-
+        mouthManager.HideContent();
         //Set Type
         actionType = type;
         switch (actionType)
         {
             case ActionType.Lick:
-
+                mouthManager.ShowContent();
                 break;
             case ActionType.Tadpole:
                 assManager.ShowContent();
@@ -121,14 +123,17 @@ public class HeadManager : MonoBehaviour
             switch (actionType)
             {
                 case ActionType.Lick:
-                    LickAction(mousePosition);
+                    //LickAction(mousePosition);
+                    mouthManager.StartExtendTongue();
+                    timerBornTadpole = GameGlobal.intervalLick;
                     break;
                 case ActionType.Tadpole:
                     //BornTadpole(mousePosition);
                     BornTadpole(assManager.GetAssPosition());
+                    StartCoroutine(assManager.IE_bornAni());
+                    timerBornTadpole = GameGlobal.intervalBorn;
                     break;
             }
-            timerBornTadpole = 0.4f;
         }
     }
 
@@ -138,6 +143,7 @@ public class HeadManager : MonoBehaviour
         switch (actionType)
         {
             case ActionType.Lick:
+                mouthManager.SetPosition(mousePosition);
                 break;
             case ActionType.Tadpole:
                 assManager.SetPosition(mousePosition);
@@ -150,7 +156,7 @@ public class HeadManager : MonoBehaviour
     #region Dot
 
     //Dig a hole
-    public void LickAction(Vector2 pos)
+    public void CheckClickMakeHole(Vector2 pos)
     {
         Collider2D overCollider2D = Physics2D.OverlapCircle(pos, 0.01f, LayerMask.GetMask("Head"));
         if (overCollider2D != null)
@@ -164,7 +170,7 @@ public class HeadManager : MonoBehaviour
     {
         Vector2Int pixelPos = WorldToPixel(pos);
         Debug.Log(pixelPos);
-        int radius = 25;
+        int radius = GameGlobal.HoleRadius;
 
         int px, nx, py, ny, distance;
 
@@ -178,10 +184,10 @@ public class HeadManager : MonoBehaviour
                 py = pixelPos.y + j;
                 ny = pixelPos.y - j;
 
-                newTexture.SetPixel(px, py, Color.clear);
-                newTexture.SetPixel(nx, py, Color.clear);
-                newTexture.SetPixel(px, ny, Color.clear);
-                newTexture.SetPixel(nx, ny, Color.clear);
+                CheckClearPixel(px, py);
+                CheckClearPixel(nx, py);
+                CheckClearPixel(px, ny);
+                CheckClearPixel(nx, ny);
             }
         }
 
@@ -195,6 +201,17 @@ public class HeadManager : MonoBehaviour
         colHead = sr_Head.gameObject.AddComponent<PolygonCollider2D>();
         colHead.sharedMaterial = pm_Head;
     }
+
+    private void CheckClearPixel(int x, int y)
+    {
+        //IMPORTANT CHECK
+        if(y> pixelHeight)
+        {
+            return;
+        }
+        newTexture.SetPixel(x, y, Color.clear);
+    }
+
     #endregion
 
     #region CommonAction

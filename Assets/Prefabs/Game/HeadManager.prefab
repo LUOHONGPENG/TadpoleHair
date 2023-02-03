@@ -35,37 +35,6 @@ Transform:
   m_Father: {fileID: 7927253901340451392}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1396424999345048660
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1808832863768542370}
-  m_Layer: 0
-  m_Name: locaGenerateTadpole
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1808832863768542370
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1396424999345048660}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4825875874452675442}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1720278097614600159
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +150,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4825875874452675442}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &597718343468670413
 BoxCollider2D:
@@ -334,7 +303,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1808832863768542370}
   - {fileID: 7708707789063005131}
   m_Father: {fileID: 3146554508121893528}
   m_RootOrder: 2
@@ -392,7 +360,7 @@ MonoBehaviour:
   tfContentTadpole: {fileID: 350755849822546528}
   assManager: {fileID: 2452800181473225932}
   mouthManager: {fileID: 2249643404853005589}
-  locaGenerateTadpole: {fileID: 1808832863768542370}
+  locaGenerateTadpole: {fileID: 0}
 --- !u!1 &8541761410584221375
 GameObject:
   m_ObjectHideFlags: 0
