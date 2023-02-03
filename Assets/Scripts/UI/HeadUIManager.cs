@@ -11,6 +11,8 @@ public class HeadUIManager : MonoBehaviour
     public Button btnFrogEgg;
     public Button btnWater;
 
+    public Text txTime;
+
     private HeadManager headManager;
 
     public void Init()

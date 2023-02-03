@@ -37,8 +37,7 @@ public class HeadManager : MonoBehaviour
     float worldWidth, worldHeight;
     float pixelWidth, pixelHeight;
     //Cool down timer for generating the tadpole
-    float timerBornTadpole = 0;
-
+    float timerAction = 0;
     //
     public void Init()
     {
@@ -46,6 +45,7 @@ public class HeadManager : MonoBehaviour
         headUIManager = GameManager.Instance.uiManager.headUIManager;
         assManager.Init(this);
         mouthManager.Init(this);
+        timerAction = 2f;
     }
 
     //StartGame
@@ -84,9 +84,9 @@ public class HeadManager : MonoBehaviour
 
     public void Update()
     {
-        timerBornTadpole -= Time.deltaTime;
+        timerAction -= Time.deltaTime;
 
-        if (timerBornTadpole < 0)
+        if (timerAction < 0)
         {
             CheckHoverAction();
 
@@ -126,7 +126,7 @@ public class HeadManager : MonoBehaviour
                     //LickAction(mousePosition);
                     mouthManager.StartExtendTongue();
                     GameManager.Instance.soundManager.PlaySound(SoundType.Lick);
-                    timerBornTadpole = GameGlobal.intervalLick;
+                    timerAction = GameGlobal.intervalLick;
                     break;
                 case ActionType.Tadpole:
                     //BornTadpole(mousePosition);
@@ -141,7 +141,7 @@ public class HeadManager : MonoBehaviour
                     {
                         GameManager.Instance.soundManager.PlaySound(SoundType.BornTadpole1);
                     }
-                    timerBornTadpole = GameGlobal.intervalBorn;
+                    timerAction = GameGlobal.intervalBorn;
                     break;
             }
         }

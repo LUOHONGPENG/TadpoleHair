@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6791392175692463881}
   - component: {fileID: 174934888109743990}
   - component: {fileID: 7493362741273751295}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: colliderTongue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
