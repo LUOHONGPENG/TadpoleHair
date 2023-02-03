@@ -29,11 +29,9 @@ public class TadpoleManager : MonoBehaviour
     private int idEye = 0;
     private int idMouth = 0;
 
-
-
     public float GetTadpoleScale()
     {
-        return 0.3f;
+        return 0.2f;
     }
 
 
@@ -70,7 +68,7 @@ public class TadpoleManager : MonoBehaviour
         srBody.transform.localScale = new Vector2(GetTadpoleScale(), GetTadpoleScale());
 
         srBody.transform.localPosition = new Vector2(listPosBody[idBody].x * GetTadpoleScale(),listPosBody[idBody].y * GetTadpoleScale());
-        srBody.gameObject.AddComponent<PolygonCollider2D>();
+        //srBody.gameObject.AddComponent<PolygonCollider2D>();
     }
 
     public IEnumerator IE_InitTadpole()

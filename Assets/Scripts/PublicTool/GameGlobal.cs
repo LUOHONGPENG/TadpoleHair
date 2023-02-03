@@ -8,7 +8,9 @@ public static class GameGlobal
     public static float intervalBorn = 0.5f;
     public static float intervalLick = 0.4f;
 
+    //Tongue
     public static int HoleRadius = 30;
+    public static float LowestTongue = -6f;
 
     //Position Set
     public static float initialTongueY = 3.8f;

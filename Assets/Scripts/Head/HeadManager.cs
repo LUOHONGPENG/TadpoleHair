@@ -125,12 +125,22 @@ public class HeadManager : MonoBehaviour
                 case ActionType.Lick:
                     //LickAction(mousePosition);
                     mouthManager.StartExtendTongue();
+                    GameManager.Instance.soundManager.PlaySound(SoundType.Lick);
                     timerBornTadpole = GameGlobal.intervalLick;
                     break;
                 case ActionType.Tadpole:
                     //BornTadpole(mousePosition);
                     BornTadpole(assManager.GetAssPosition());
                     StartCoroutine(assManager.IE_bornAni());
+                    int ranSound = Random.Range(0, 2);
+                    if (ranSound == 0)
+                    {
+                        GameManager.Instance.soundManager.PlaySound(SoundType.BornTadpole0);
+                    }
+                    else if(ranSound == 1)
+                    {
+                        GameManager.Instance.soundManager.PlaySound(SoundType.BornTadpole1);
+                    }
                     timerBornTadpole = GameGlobal.intervalBorn;
                     break;
             }

@@ -9,6 +9,7 @@ public class FrogMouthManager : MonoBehaviour
     public Transform tfMouth;
     public Transform tfTongue;
     public CircleCollider2D colTongue;
+    public Rigidbody2D bodyTongue;
 
     private float timerGoDown = 0;
     private float timerGoUp = 0;
@@ -30,7 +31,7 @@ public class FrogMouthManager : MonoBehaviour
     {
         this.parent = parent;
 
-        float lengthPre = tfTongue.transform.localPosition.y - (-1f);
+        float lengthPre = tfTongue.transform.localPosition.y - GameGlobal.LowestTongue;
         speedTongueDown = lengthPre / (GameGlobal.intervalLick / 2f);
         speedTongueNormalUp = lengthPre / (GameGlobal.intervalLick / 2f);
     }
@@ -61,6 +62,7 @@ public class FrogMouthManager : MonoBehaviour
         timerGoUp = GameGlobal.intervalLick / 2f;
         isNormalLick = true;
         speedTongueSpecialUp = 0;
+        colTongue.enabled = true;
     }
 
     public void BreakTongue()
@@ -74,6 +76,8 @@ public class FrogMouthManager : MonoBehaviour
         isNormalLick = false;
         float lengthPre = GameGlobal.initialTongueY - tfTongue.transform.localPosition.y;
         speedTongueSpecialUp = lengthPre / (GameGlobal.intervalLick / 2f);
+
+        colTongue.enabled = false;
     }
 
     private void CheckWhetherBreakTongue()
@@ -116,6 +120,7 @@ public class FrogMouthManager : MonoBehaviour
         }
         else
         {
+            colTongue.enabled = false;
             tfTongue.transform.localPosition = new Vector2(0, GameGlobal.initialTongueY);
         }
     }

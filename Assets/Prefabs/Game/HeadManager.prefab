@@ -60,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720278097614600159}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0.58, y: -2.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108,7 +108,7 @@ SpriteRenderer:
   m_SortingLayerID: 292153703
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7379fc044f823f048bb8539f899158b0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e30e92fa6b3ccbf40b9cda5e22080fc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -215,8 +215,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3446336375461188631}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.5, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalPosition: {x: 0, y: -2.76, z: 0}
+  m_LocalScale: {x: 0.68, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 866450505335895452}
@@ -264,12 +264,12 @@ SpriteRenderer:
   m_SortingLayerID: 292153703
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 475769d70c39ee3489ddbfd5d0062c9e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a610daadbd662343a5790c951ce0bb1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 12.99, y: 6.77}
+  m_Size: {x: 20.37, y: 8.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -353,14 +353,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objContent: {fileID: 10949353390956860}
-  texture_Head: {fileID: 2800000, guid: 475769d70c39ee3489ddbfd5d0062c9e, type: 3}
+  texture_Head: {fileID: 2800000, guid: 9a610daadbd662343a5790c951ce0bb1, type: 3}
   sr_Head: {fileID: 3875119767816500710}
   pm_Head: {fileID: 6200000, guid: 94afde12f73ca6648b37dd51ce77f60d, type: 2}
   pfTadpole: {fileID: 7609437520002920499, guid: 19240bd1e32a84443a750d0c61036781, type: 3}
   tfContentTadpole: {fileID: 350755849822546528}
   assManager: {fileID: 2452800181473225932}
   mouthManager: {fileID: 2249643404853005589}
-  locaGenerateTadpole: {fileID: 0}
 --- !u!1 &8541761410584221375
 GameObject:
   m_ObjectHideFlags: 0
