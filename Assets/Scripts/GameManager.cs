@@ -6,12 +6,13 @@ public class GameManager : MonoSingleton<GameManager>
 {
     public HeadManager headManager;
     public UIManager uiManager;
-
+    public SoundManager soundManager;
 
     public void Start()
     {
         headManager.Init();
         uiManager.Init();
+        soundManager.Init();
     }
 
     public void StartHead()
