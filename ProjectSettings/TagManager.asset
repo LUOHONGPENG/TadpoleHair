@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3369304329
+    locked: 0
   - name: Frog
     uniqueID: 1934876481
     locked: 0
