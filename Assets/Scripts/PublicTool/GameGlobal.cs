@@ -10,7 +10,7 @@ public static class GameGlobal
 
     //Tongue
     public static int HoleRadius = 30;
-    public static float LowestTongue = -6f;
+    public static float LowestTongue = -10f;
 
     //Position Set
     public static float initialTongueY = 3.8f;

@@ -28,6 +28,7 @@ public class TadpoleManager : MonoBehaviour
     private int idBody = 0;
     private int idEye = 0;
     private int idMouth = 0;
+    private Coroutine layerCoroutine;
 
     public float GetTadpoleScale()
     {
@@ -40,7 +41,7 @@ public class TadpoleManager : MonoBehaviour
         InitTadpoleID();
         InitTadpoleSpritePos();
         ResetTadpoleScale();
-        StartCoroutine(IE_InitTadpole());
+        layerCoroutine = StartCoroutine(IE_InitTadpole());
     }
 
     public void InitTadpoleID()
@@ -78,5 +79,10 @@ public class TadpoleManager : MonoBehaviour
         srEyeL.sortingOrder = 1;
         srEyeR.sortingOrder = 1;
         srMouth.sortingOrder = 1;
+    }
+
+    public void DestroyReady()
+    {
+        StopCoroutine(layerCoroutine);
     }
 }

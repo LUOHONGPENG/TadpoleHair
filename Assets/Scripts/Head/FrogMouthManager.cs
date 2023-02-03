@@ -69,7 +69,7 @@ public class FrogMouthManager : MonoBehaviour
     {
         Debug.Log("Break");
         float holeCenterX = colTongue.transform.position.x;
-        float holeCenterY = colTongue.transform.position.y - colTongue.radius;
+        float holeCenterY = colTongue.transform.position.y - colTongue.radius/2;
         parent.MakeHole(new Vector2(holeCenterX,holeCenterY));
 
         timerGoDown = 0;

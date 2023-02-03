@@ -9,6 +9,11 @@ public class TadpoleKiller : MonoBehaviour
         if(collision.gameObject.layer == LayerMask.NameToLayer("Tadpole"))
         {
             GameManager.Instance.soundManager.PlaySound(SoundType.KillTadpole);
+            TadpoleManager item = collision.transform.parent.parent.parent.GetComponent<TadpoleManager>();
+            if (item != null)
+            {
+                item.DestroyReady();
+            }
             Destroy(collision.transform.parent.gameObject);
         }
     }
