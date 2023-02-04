@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class HeadUIManager : MonoBehaviour
 {
@@ -10,10 +11,10 @@ public class HeadUIManager : MonoBehaviour
     public Button btnTodpole;
     public Button btnFrogEgg;
     public Button btnWater;
-
+    [Header("Data")]
     public Text txTime;
     public Text txScore;
-
+    public Image imgAlarm;
 
     private HeadManager headManager;
 
@@ -24,15 +25,19 @@ public class HeadUIManager : MonoBehaviour
             txTime.text = Mathf.CeilToInt(GameManager.Instance.timerOneTurn).ToString();
             txScore.text = GameManager.Instance.currentScore.ToString();
 
+            imgAlarm.fillAmount = GameManager.Instance.currentDoubt / 100f;
+
             switch (headManager.getActionType())
             {
                 case ActionType.Lick:
-                    btnTongue.transform.localScale = new Vector3(1.2F, 1.2F,1f);
-                    btnTodpole.transform.localScale = new Vector3(0.9F, 0.9F,1f);
+                    LickButtonAni();
+                    //btnTongue.transform.localScale = new Vector3(1.2F, 1.2F,1f);
+                    //btnTodpole.transform.localScale = new Vector3(0.7F, 0.7F,1f);
                     break;
                 case ActionType.Tadpole:
-                    btnTongue.transform.localScale = new Vector3(0.9F,0.9F,1f);
-                    btnTodpole.transform.localScale = new Vector3(1.2F, 1.2F,1f);
+                    BornButtonAni();
+                    //btnTongue.transform.localScale = new Vector3(0.7F,0.7F,1f);
+                    //btnTodpole.transform.localScale = new Vector3(1.2F, 1.2F,1f);
                     break;
             }
 
@@ -46,6 +51,19 @@ public class HeadUIManager : MonoBehaviour
                 headManager.ChangeAction(ActionType.Tadpole);
             }
         }
+    }
+
+    public void LickButtonAni()
+    {
+        btnTongue.transform.DOScale(1.2f, 0.2f);
+        btnTodpole.transform.DOScale(0.7f, 0.2f);
+
+    }
+
+    public void BornButtonAni()
+    {
+        btnTongue.transform.DOScale(0.7f, 0.2f);
+        btnTodpole.transform.DOScale(1.2f, 0.2f);
     }
 
     public void Init()

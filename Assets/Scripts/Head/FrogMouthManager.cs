@@ -26,6 +26,11 @@ public class FrogMouthManager : MonoBehaviour
         CheckMoveTongue();
     }
 
+    public void StartGame()
+    {
+        colTongue.transform.localPosition = new Vector2(0, -3.964f);
+    }
+
     #region Basic
     public void Init(HeadManager parent)
     {

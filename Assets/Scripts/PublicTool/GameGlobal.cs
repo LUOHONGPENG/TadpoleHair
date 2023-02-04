@@ -16,4 +16,6 @@ public static class GameGlobal
     public static float initialTongueY = 3.8f;
     public static float PosMouthY = 0;
     public static float PosAssY = -1f;
+
+    public static int OneTadpoleDropPenalty = 20;
 }

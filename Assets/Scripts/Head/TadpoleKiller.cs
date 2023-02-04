@@ -15,6 +15,8 @@ public class TadpoleKiller : MonoBehaviour
                 item.DestroyReady();
             }
             Destroy(collision.transform.parent.gameObject);
+
+            GameManager.Instance.AddDoubt(GameGlobal.OneTadpoleDropPenalty);
         }
     }
 

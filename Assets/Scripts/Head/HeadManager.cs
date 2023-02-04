@@ -47,7 +47,7 @@ public class HeadManager : MonoBehaviour
         headUIManager = GameManager.Instance.uiManager.headUIManager;
         assManager.Init(this);
         mouthManager.Init(this);
-        timerAction = 2f;
+        timerAction = 1f;
     }
 
     //StartGame
@@ -57,6 +57,9 @@ public class HeadManager : MonoBehaviour
         InitHead();
         PublicTool.ClearChildItem(tfContentTadpole);
         ChangeAction(ActionType.Lick);
+        timerAction = 1f;
+
+        mouthManager.StartGame();
     }
 
     #region InitHead

@@ -10,6 +10,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public float timerOneTurn = 0;
     public float timerCheckScore = 0;
+    public int currentDoubt = 0;
     public int currentScore = 0;
     public bool isStartGame = false;
 
@@ -27,9 +28,20 @@ public class GameManager : MonoSingleton<GameManager>
         headManager.StartGame();
         uiManager.headUIManager.ShowContent();
         Time.timeScale = 1f;
+        currentDoubt = 0;
         timerOneTurn = 60f;
         isStartGame = true;
     }
+
+    public void AddDoubt(int value)
+    {
+        currentDoubt += value;
+        if (currentDoubt >= 100)
+        {
+            //Dead
+        }
+    }
+
 
     private void Update()
     {
