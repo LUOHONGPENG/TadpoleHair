@@ -12,6 +12,8 @@ public class HeadUIManager : MonoBehaviour
     public Button btnWater;
 
     public Text txTime;
+    public Text txScore;
+
 
     private HeadManager headManager;
 
@@ -20,6 +22,29 @@ public class HeadUIManager : MonoBehaviour
         if (GameManager.Instance.isStartGame)
         {
             txTime.text = Mathf.CeilToInt(GameManager.Instance.timerOneTurn).ToString();
+            txScore.text = GameManager.Instance.currentScore.ToString();
+
+            switch (headManager.getActionType())
+            {
+                case ActionType.Lick:
+                    btnTongue.transform.localScale = new Vector3(1.2F, 1.2F,1f);
+                    btnTodpole.transform.localScale = new Vector3(0.9F, 0.9F,1f);
+                    break;
+                case ActionType.Tadpole:
+                    btnTongue.transform.localScale = new Vector3(0.9F,0.9F,1f);
+                    btnTodpole.transform.localScale = new Vector3(1.2F, 1.2F,1f);
+                    break;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                headManager.ChangeAction(ActionType.Lick);
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                headManager.ChangeAction(ActionType.Tadpole);
+            }
         }
     }
 

@@ -125,6 +125,11 @@ public class HeadManager : MonoBehaviour
         }
     }
 
+    public ActionType getActionType()
+    {
+        return actionType;
+    }
+
     public void CheckClickAction()
     {
         if (Input.GetMouseButton(0))

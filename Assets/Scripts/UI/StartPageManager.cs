@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class StartPageManager : MonoBehaviour
 {
     public GameObject objPage;
+    public Transform tfFrog;
     public Button btnPlay;
     public Button btnHelp;
 
@@ -24,7 +25,15 @@ public class StartPageManager : MonoBehaviour
         });
     }
 
+    public void Update()
+    {
+        if (objPage.activeSelf)
+        {
+            Vector2 mousePos = PublicTool.GetMousePosition2D();
 
+            tfFrog.position = new Vector2(0.4f * mousePos.x,0.4f * mousePos.y);
+        }
+    }
 
     public void ShowContent()
     {
