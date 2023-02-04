@@ -15,6 +15,10 @@ public class HeadUIManager : MonoBehaviour
     public Text txTime;
     public Text txScore;
     public Image imgAlarm;
+    public Image imgAnger;
+    public List<Sprite> listSpAnger;
+    public Color startColor;
+    public Color endColor;
 
     private HeadManager headManager;
 
@@ -24,8 +28,6 @@ public class HeadUIManager : MonoBehaviour
         {
             txTime.text = Mathf.CeilToInt(GameManager.Instance.timerOneTurn).ToString();
             txScore.text = GameManager.Instance.currentScore.ToString();
-
-            imgAlarm.fillAmount = GameManager.Instance.currentDoubt / 100f;
 
             switch (headManager.getActionType())
             {
@@ -98,10 +100,53 @@ public class HeadUIManager : MonoBehaviour
     public void ShowContent()
     {
         objContent.SetActive(true);
+        UpdateAngerBar();
     }
 
     public void HideContent()
     {
         objContent.SetActive(false);
     }
+
+
+    #region AngerBar
+
+    public void UpdateAngerBar()
+    {
+        //imgAlarm.fillAmount = GameManager.Instance.currentDoubt / 100f;
+        float rate = GameManager.Instance.currentDoubt / 100f;
+        imgAlarm.DOFillAmount(rate, 0.2f);
+        imgAnger.transform.DOLocalMove(CalculatePosAnger(rate), 0.2f);
+        imgAlarm.DOColor(CalculateColorAnger(rate), 0.2f);
+        if (rate >= 0.8F)
+        {
+            imgAnger.sprite = listSpAnger[2];
+        }
+        else if(rate >= 0.4f)
+        {
+            imgAnger.sprite = listSpAnger[1];
+        }
+        else
+        {
+            imgAnger.sprite = listSpAnger[0];
+        }
+        imgAnger.SetNativeSize();
+    }
+
+    public Vector2 CalculatePosAnger(float rate)
+    {
+        float posY = -500f + rate * (587f - (-500f));
+        float posX = -10f + rate * (0 - (-10f));
+        return new Vector2(posX,posY);
+    }
+
+    public Color CalculateColorAnger(float rate)
+    {
+        float colorR = startColor.r + rate * (endColor.r - startColor.r);
+        float colorG = startColor.g + rate * (endColor.g - startColor.g);
+        float colorB = startColor.b + rate * (endColor.b - startColor.b);
+        return new Color(colorR, colorG,colorB,1f);
+    }
+    #endregion
+
 }

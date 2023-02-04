@@ -14,14 +14,17 @@ public enum ActionType
 public class HeadManager : MonoBehaviour
 {
     public GameObject objContent;
-    [Header("Asset")]
+    [Header("Head")]
     public Texture2D texture_Head;
     public SpriteRenderer sr_Head;
     public PhysicsMaterial2D pm_Head;
+    [Header("Tadpole")]
     public GameObject pfTadpole;
     public Transform tfContentTadpole;
     public PolygonCollider2D triggerHead;
-
+    [Header("Ghost")]
+    public GameObject pfGhost;
+    public Transform tfContentGhost;
     [Header("SubManager")]
     public FrogAssManager assManager;
     public FrogMouthManager mouthManager;
@@ -56,6 +59,7 @@ public class HeadManager : MonoBehaviour
         objContent.SetActive(true);
         InitHead();
         PublicTool.ClearChildItem(tfContentTadpole);
+        PublicTool.ClearChildItem(tfContentGhost);
         ChangeAction(ActionType.Lick);
         timerAction = 1f;
 
@@ -290,6 +294,16 @@ public class HeadManager : MonoBehaviour
             }
         }
         return score;
+    }
+    #endregion
+
+    #region Ghost
+
+    public void CreateGhost(Vector2 pos)
+    {
+        GameObject objGhost = GameObject.Instantiate(pfGhost,new Vector3(pos.x,-9f,0),Quaternion.Euler(Vector3.zero),tfContentGhost);
+        GhostManager itemGhost = objGhost.GetComponent<GhostManager>();
+        itemGhost.Init(pos);
     }
     #endregion
 }

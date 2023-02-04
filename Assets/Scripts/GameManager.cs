@@ -25,21 +25,28 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void StartHead()
     {
-        headManager.StartGame();
-        uiManager.headUIManager.ShowContent();
         Time.timeScale = 1f;
         currentDoubt = 0;
         timerOneTurn = 60f;
+        headManager.StartGame();
+        uiManager.headUIManager.ShowContent();
         isStartGame = true;
     }
 
     public void AddDoubt(int value)
     {
         currentDoubt += value;
+        uiManager.headUIManager.UpdateAngerBar();
         if (currentDoubt >= 100)
         {
-            //Dead
+            currentDoubt = 100;
+            GameOver(false);
         }
+    }
+
+    public void GameOver(bool isWin)
+    {
+        uiManager.endUIManager.ShowContent();
     }
 
 
@@ -54,7 +61,7 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 Time.timeScale = 0;
                 currentScore = headManager.CalculateScore();
-                uiManager.endUIManager.ShowContent();
+                GameOver(true);
             }
 
             //CheckScore
