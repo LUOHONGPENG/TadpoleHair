@@ -7,12 +7,13 @@ public class UIManager : MonoBehaviour
     public StartPageManager startPageManager;
     public HeadUIManager headUIManager;
     public HelpUIManager helpUIManager;
-
+    public EndUIManager endUIManager;
     public void Init()
     {
         //InitAllUIManager;
         startPageManager.Init();
         headUIManager.Init();
+        endUIManager.Init();
         //
         startPageManager.ShowContent();
     }

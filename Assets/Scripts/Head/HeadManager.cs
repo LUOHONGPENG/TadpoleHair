@@ -55,6 +55,7 @@ public class HeadManager : MonoBehaviour
     {
         objContent.SetActive(true);
         InitHead();
+        PublicTool.ClearChildItem(tfContentTadpole);
         ChangeAction(ActionType.Lick);
     }
 
@@ -75,8 +76,12 @@ public class HeadManager : MonoBehaviour
         pixelHeight = sr_Head.sprite.texture.height;
 
         Debug.Log("World:" + worldWidth + "," + worldHeight + "Pixel:" + pixelWidth + "," + pixelHeight);
-        
+
         //Generate the collider
+        if (colHead != null)
+        {
+            Destroy(colHead);
+        }
         colHead = sr_Head.gameObject.AddComponent<PolygonCollider2D>();
         colHead.sharedMaterial = pm_Head;
     }
@@ -86,15 +91,18 @@ public class HeadManager : MonoBehaviour
 
     public void Update()
     {
-        timerAction -= Time.deltaTime;
-
-        if (timerAction < 0)
+        if (GameManager.Instance.isStartGame)
         {
-            CheckHoverAction();
+            timerAction -= Time.deltaTime;
 
-            if (!EventSystem.current.IsPointerOverGameObject())
+            if (timerAction < 0)
             {
-                CheckClickAction();
+                CheckHoverAction();
+
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    CheckClickAction();
+                }
             }
         }
     }

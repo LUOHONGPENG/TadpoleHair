@@ -15,6 +15,14 @@ public class HeadUIManager : MonoBehaviour
 
     private HeadManager headManager;
 
+    private void Update()
+    {
+        if (GameManager.Instance.isStartGame)
+        {
+            txTime.text = Mathf.CeilToInt(GameManager.Instance.timerOneTurn).ToString();
+        }
+    }
+
     public void Init()
     {
         headManager = GameManager.Instance.headManager;

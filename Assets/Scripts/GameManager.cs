@@ -19,12 +19,14 @@ public class GameManager : MonoSingleton<GameManager>
         uiManager.Init();
         soundManager.Init();
         isStartGame = false;
+        Time.timeScale = 0;
     }
 
     public void StartHead()
     {
         headManager.StartGame();
         uiManager.headUIManager.ShowContent();
+        Time.timeScale = 1f;
         timerOneTurn = 60f;
         isStartGame = true;
     }
@@ -38,9 +40,10 @@ public class GameManager : MonoSingleton<GameManager>
 
             if (timerOneTurn < 0)
             {
-
+                Time.timeScale = 0;
+                currentScore = headManager.CalculateScore();
+                uiManager.endUIManager.ShowContent();
             }
-
 
             //CheckScore
             if (timerCheckScore < 0)
