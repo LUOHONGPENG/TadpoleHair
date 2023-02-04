@@ -20,6 +20,7 @@ public class HeadManager : MonoBehaviour
     public PhysicsMaterial2D pm_Head;
     public GameObject pfTadpole;
     public Transform tfContentTadpole;
+    public PolygonCollider2D triggerHead;
 
     [Header("SubManager")]
     public FrogAssManager assManager;
@@ -38,7 +39,8 @@ public class HeadManager : MonoBehaviour
     float pixelWidth, pixelHeight;
     //Cool down timer for generating the tadpole
     float timerAction = 0;
-    //
+    
+
     public void Init()
     {
         objContent.SetActive(false);
@@ -254,5 +256,24 @@ public class HeadManager : MonoBehaviour
         itemTadpole.InitTadpole();
     }
 
+    #endregion
+
+    #region Check
+
+    public int CalculateScore()
+    {
+        int score = 0;
+        ContactFilter2D filter = new ContactFilter2D().NoFilter();
+        List<Collider2D> results = new List<Collider2D>();
+        triggerHead.OverlapCollider(filter, results);
+        foreach(Collider2D col in results)
+        {
+            if(col.gameObject.tag == "Score")
+            {
+                score++;
+            }
+        }
+        return score;
+    }
     #endregion
 }

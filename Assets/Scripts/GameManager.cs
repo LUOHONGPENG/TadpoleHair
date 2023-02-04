@@ -9,6 +9,8 @@ public class GameManager : MonoSingleton<GameManager>
     public SoundManager soundManager;
 
     public float timerOneTurn = 0;
+    public float timerCheckScore = 0;
+    public int currentScore = 0;
     public bool isStartGame = false;
 
     public void Start()
@@ -32,9 +34,19 @@ public class GameManager : MonoSingleton<GameManager>
         if (isStartGame)
         {
             timerOneTurn -= Time.deltaTime;
+            timerCheckScore -= Time.deltaTime;
+
             if (timerOneTurn < 0)
             {
 
+            }
+
+
+            //CheckScore
+            if (timerCheckScore < 0)
+            {
+                currentScore = headManager.CalculateScore();
+                Debug.Log(currentScore);
             }
         }
     }

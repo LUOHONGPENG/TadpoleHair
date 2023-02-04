@@ -11,6 +11,7 @@ public class TadpoleManager : MonoBehaviour
     public SpriteRenderer srEyeR;
     public SpriteRenderer srMouth;
     public Collider2D colliderTadpole;
+    public Animator aniTadpole;
 
     [Header("Asset")]
     public List<Sprite> listSpBody;
@@ -46,7 +47,8 @@ public class TadpoleManager : MonoBehaviour
 
     public void InitTadpoleID()
     {
-        idBody = Random.Range(0, 3);
+        //idBody = Random.Range(0, 3);
+        idBody = 0;
         idEye = Random.Range(0, 3);
         idMouth = Random.Range(0, 3);
     }
@@ -54,6 +56,20 @@ public class TadpoleManager : MonoBehaviour
     public void InitTadpoleSpritePos()
     {
         srBody.sprite = listSpBody[idBody];
+        switch (idBody)
+        {
+            case 0:
+                aniTadpole.Play("aniTadpole01");
+                break;
+            case 1:
+                aniTadpole.Play("aniTadpole02");
+                break;
+            case 2:
+                aniTadpole.Play("aniTadpole03");
+                break;
+        }
+
+
         srEyeL.sprite = listSpEyeL[idEye];
         srEyeR.sprite = listSpEyeR[idEye];
         srMouth.sprite = listSpMouth[idMouth];

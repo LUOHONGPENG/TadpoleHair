@@ -359,6 +359,7 @@ MonoBehaviour:
   pm_Head: {fileID: 6200000, guid: 94afde12f73ca6648b37dd51ce77f60d, type: 2}
   pfTadpole: {fileID: 7609437520002920499, guid: 19240bd1e32a84443a750d0c61036781, type: 3}
   tfContentTadpole: {fileID: 350755849822546528}
+  triggerHead: {fileID: 1809838251505826913}
   assManager: {fileID: 2452800181473225932}
   mouthManager: {fileID: 2249643404853005589}
 --- !u!1 &6547842352642500511
