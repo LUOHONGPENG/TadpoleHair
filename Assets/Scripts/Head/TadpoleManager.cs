@@ -59,13 +59,13 @@ public class TadpoleManager : MonoBehaviour
         switch (idBody)
         {
             case 0:
-                aniTadpole.Play("aniTadpole01");
+                aniTadpole.Play("aniTad01",0,-1);
                 break;
             case 1:
-                aniTadpole.Play("aniTadpole02");
+                aniTadpole.Play("aniTad02", 0, -1);
                 break;
             case 2:
-                aniTadpole.Play("aniTadpole03");
+                aniTadpole.Play("aniTad03", 0, -1);
                 break;
         }
 

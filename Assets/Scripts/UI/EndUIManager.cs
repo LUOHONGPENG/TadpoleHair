@@ -102,6 +102,37 @@ public class EndUIManager : MonoBehaviour
 
     public void ShowContent(bool isWin)
     {
+        StartCoroutine(IE_ShowContent(isWin));
+    }
+
+    public IEnumerator IE_ShowContent(bool isWin)
+    {
+        yield return new WaitForEndOfFrame();
+        if (isWin)
+        {
+            RenderTexture rt = new RenderTexture(Screen.width, Screen.height, 0);
+            Camera.main.targetTexture = rt;
+            Camera.main.Render();
+
+            RenderTexture.active = rt;
+
+            Texture2D screenShot = new Texture2D(Screen.width,Screen.height, TextureFormat.RGB24, false);
+            screenShot.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+            screenShot.Apply();
+
+            Camera.main.targetTexture = null;
+            RenderTexture.active = null;
+            Destroy(rt);
+
+            Sprite sr = Sprite.Create(screenShot, new Rect(0, 0, Screen.width, Screen.height), new Vector2(0.5F,0.5F));
+            imgWin.sprite = sr;
+        }
+
+        InitContent(isWin);
+    }
+
+    public void InitContent(bool isWin)
+    {
         objContent.SetActive(true);
         isUpload = false;
         GoPage(PageType.Normal);
@@ -132,6 +163,7 @@ public class EndUIManager : MonoBehaviour
     {
         objContent.SetActive(false);
     }
+
 
 
 }

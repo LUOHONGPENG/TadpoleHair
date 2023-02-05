@@ -555,7 +555,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -59, y: -36}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1247, y: 717}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1107562922482437782
@@ -1996,6 +1996,7 @@ MonoBehaviour:
   btnBackFromLoad: {fileID: 4690872465515875199}
   btnRealUpload: {fileID: 9096528481845235468}
   btnBackFromBoard: {fileID: 6741102817132994328}
+  captureRect: {fileID: 0}
 --- !u!1 &8667324244804211075
 GameObject:
   m_ObjectHideFlags: 0

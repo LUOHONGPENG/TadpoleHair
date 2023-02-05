@@ -81,7 +81,6 @@ public class GameManager : MonoSingleton<GameManager>
             if (timerCheckScore < 0)
             {
                 currentScore = headManager.CalculateScore();
-                Debug.Log(currentScore);
             }
         }
     }

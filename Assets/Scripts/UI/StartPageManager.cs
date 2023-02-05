@@ -45,4 +45,6 @@ public class StartPageManager : MonoBehaviour
         objPage.SetActive(false);
         GameManager.Instance.StartHead();
     }
+
+
 }
