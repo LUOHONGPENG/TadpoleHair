@@ -98,7 +98,7 @@ public class HeadManager : MonoBehaviour
 
     public void Update()
     {
-        if (GameManager.Instance.isStartGame)
+        if (GameManager.Instance.isStartGame && !GameManager.Instance.isGameOver)
         {
             timerAction -= Time.deltaTime;
 

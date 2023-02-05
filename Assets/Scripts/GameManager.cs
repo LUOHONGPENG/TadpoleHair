@@ -13,6 +13,7 @@ public class GameManager : MonoSingleton<GameManager>
     public int currentDoubt = 0;
     public int currentScore = 0;
     public bool isStartGame = false;
+    public bool isGameOver = false;
 
     public void Start()
     {
@@ -31,6 +32,8 @@ public class GameManager : MonoSingleton<GameManager>
         headManager.StartGame();
         uiManager.headUIManager.ShowContent();
         isStartGame = true;
+        isGameOver = false;
+
     }
 
     public void AddDoubt(int value)
@@ -46,9 +49,20 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void GameOver(bool isWin)
     {
-        uiManager.endUIManager.ShowContent();
+        isStartGame = false;
+        if (!isGameOver)
+        {
+            StartCoroutine(IE_GameOver(isWin));
+            isGameOver = true;
+        }
     }
 
+    public IEnumerator IE_GameOver(bool isWin)
+    {
+        yield return new WaitForSeconds(0.2f);
+        Time.timeScale = 0;
+        uiManager.endUIManager.ShowContent(isWin);
+    }
 
     private void Update()
     {
@@ -59,7 +73,6 @@ public class GameManager : MonoSingleton<GameManager>
 
             if (timerOneTurn < 0)
             {
-                Time.timeScale = 0;
                 currentScore = headManager.CalculateScore();
                 GameOver(true);
             }
