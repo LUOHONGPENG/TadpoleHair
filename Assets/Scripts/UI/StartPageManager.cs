@@ -21,7 +21,7 @@ public class StartPageManager : MonoBehaviour
         btnHelp.onClick.RemoveAllListeners();
         btnHelp.onClick.AddListener(delegate ()
         {
-
+            GameManager.Instance.uiManager.helpUIManager.ShowContent();
         });
     }
 

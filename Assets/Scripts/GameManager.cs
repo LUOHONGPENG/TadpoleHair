@@ -1,3 +1,4 @@
+using LootLocker.Requests;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,11 +18,34 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void Start()
     {
+        StartCoroutine(LoginRoutine());
+
+
         headManager.Init();
         uiManager.Init();
         soundManager.Init();
         isStartGame = false;
         Time.timeScale = 0;
+    }
+
+    IEnumerator LoginRoutine()
+    {
+        bool done = false;
+        LootLockerSDKManager.StartGuestSession((response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("Player was logged in");
+                PlayerPrefs.SetString("PlayerID", response.player_id.ToString());
+                done = true;
+            }
+            else
+            {
+                Debug.Log("Could not start session");
+                done = true;
+            }
+        });
+        yield return new WaitWhile(() => done == false);
     }
 
     public void StartHead()
@@ -59,7 +83,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public IEnumerator IE_GameOver(bool isWin)
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1f);
         Time.timeScale = 0;
         uiManager.endUIManager.ShowContent(isWin);
     }

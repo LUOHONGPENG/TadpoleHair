@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using LootLocker.Requests;
+using System;
 
 public class EndUIManager : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class EndUIManager : MonoBehaviour
         Board
     }
 
+    int leaderboardID = 11400;
 
     [Header("Content")]
     public GameObject objContent;
@@ -29,13 +32,18 @@ public class EndUIManager : MonoBehaviour
     public Button btnBoard;
     [Header("Upload")]
     public Text codeScoreUpload;
+    public Text txTipTypeName;
+    public InputField inputName;
     public Button btnBackFromLoad;
     public Button btnRealUpload;
     [Header("Board")]
+    public Transform tfContentLeaderBoard;
+    public GameObject pfLeaderBoard;
     public Button btnBackFromBoard;
 
     private bool isUpload = false;
 
+    [System.Obsolete]
     public void Init()
     {
         btnRestart.onClick.RemoveAllListeners();
@@ -60,7 +68,17 @@ public class EndUIManager : MonoBehaviour
         btnRealUpload.onClick.RemoveAllListeners();
         btnRealUpload.onClick.AddListener(delegate ()
         {
-
+            if (inputName.text.Length > 0 && inputName.text.Length < 8 && CheckAllCanASCII(inputName.text))
+            {
+                SetPlayerName();
+                StartCoroutine(SubmitScoreRoutine(GameManager.Instance.currentScore, PlayerPrefs.GetString("PlayerID")));
+                isUpload = true;
+                GoPage(PageType.Normal);
+            }
+            else
+            {
+                txTipTypeName.gameObject.SetActive(true);
+            }
         });
 
         btnBackFromLoad.onClick.RemoveAllListeners();
@@ -76,6 +94,7 @@ public class EndUIManager : MonoBehaviour
         });
     }
 
+    [Obsolete]
     public void GoPage(PageType type)
     {
         contentNormal.SetActive(false);
@@ -95,6 +114,7 @@ public class EndUIManager : MonoBehaviour
                 break;
             case PageType.Board:
                 contentBoard.SetActive(true);
+                InitLeaderBoard();
                 break;
         }
         
@@ -164,6 +184,123 @@ public class EndUIManager : MonoBehaviour
         objContent.SetActive(false);
     }
 
+    #region AboutLeaderBoard
 
+    public void SetPlayerName()
+    {
+        LootLockerSDKManager.SetPlayerName(inputName.text, (response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("Successfully set player name");
+            }
+            else
+            {
+                Debug.Log("Could not set player name");
+            }
+        });
+    }
+
+    public long GetUnixTime()
+    {
+        DateTime now = DateTime.Now;
+        DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1, 0, 0, 0, 0));
+        return (long)Math.Round((now - startTime).TotalMilliseconds / 1000, MidpointRounding.AwayFromZero);
+    }
+
+    public long GetASCII(string str)
+    {
+        long num = 1;
+        for(int i = 0; i < str.Length; i++)
+        {
+            num = num * 100 + (int)str[i];
+        }
+        return num;
+    }
+
+    public bool CheckAllCanASCII(string str)
+    {
+        for (int i = 0; i < str.Length; i++)
+        {
+            if ('0' <= str[i] && str[i] <= '9')
+            {
+                continue;
+            }
+            if ('a' <= str[i] && str[i] <= 'z')
+            {
+                continue;
+            }
+
+            if ('A' <= str[i] && str[i] <= 'Z')
+            {
+                continue;
+            }
+            return false;
+        }
+        return true;
+    }
+
+
+    [System.Obsolete]
+    public IEnumerator SubmitScoreRoutine(float time, string playerName)
+    {
+        bool done = false;
+        //string nowTime = GetUnixTime().ToString();
+        string memberID = GetASCII(inputName.text).ToString();
+        
+        int score = GameManager.Instance.currentScore;
+        LootLockerSDKManager.SubmitScore(memberID, score, leaderboardID, inputName.text, (response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("Successfully uploaded time");
+                done = true;
+            }
+            else
+            {
+                Debug.Log("Failed" + response.Error);
+                done = true;
+            }
+        });
+        yield return new WaitWhile(() => done == false);
+    }
+
+    [System.Obsolete]
+    public void InitLeaderBoard()
+    {
+        PublicTool.ClearChildItem(tfContentLeaderBoard);
+        StartCoroutine(FetchLeaderBoardRoutine());
+    }
+
+    [System.Obsolete]
+
+    public IEnumerator FetchLeaderBoardRoutine()
+    {
+        bool done = false;
+        LootLockerSDKManager.GetScoreListMain(leaderboardID, 100, 0, (response) =>
+        {
+            if (response.success)
+            {
+                LootLockerLeaderboardMember[] members = response.items;
+
+                for (int i = 0; i < members.Length; i++)
+                {
+                    GameObject objMember = GameObject.Instantiate(pfLeaderBoard, tfContentLeaderBoard);
+                    ItemLeaderBoard itemMember = objMember.GetComponent<ItemLeaderBoard>();
+                    itemMember.Init(i + 1, members[i].metadata, members[i].score);
+                }
+                done = true;
+            }
+            else
+            {
+                Debug.Log("Failed" + response.Error);
+                done = true;
+            }
+
+        });
+        yield return new WaitWhile(() => done == false);
+    }
+
+    #endregion
 
 }
